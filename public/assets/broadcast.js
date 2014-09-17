@@ -12,6 +12,7 @@
                 mainContainerEl: '.main-container',
                 startBroadcastEl: '#start_broadcast',
                 gatewayServer: '',
+                apiPath: '/api/',
             }
             this.options = options = $.extend(defaultOptions, options);
             this.getOptions = function(){ return options; }
@@ -39,6 +40,24 @@
                 // no existing video, insert intro text
                 $(self.options.introEl).removeClass('hide');
                 $(self.options.introEl).show();
+            })
+
+            // Change name trigger (top right corner)
+            $('#change_name').on('click', function(){
+                $('#change_name_modal').modal();
+            })
+
+            // Save the name
+            $('#change_name_modal .btn-primary').on('click', function(){
+                var name = $('#change_name_modal [name=name]').val();
+                $.post(self.options.apiPath + 'changeName', { "name":name }, function(data){
+                    if(data.status === 'success')
+                    {
+                        $('.username').html(name);
+                    }
+                },'json')
+
+                $('#change_name_modal').modal('hide');
             })
         }
 

@@ -116,21 +116,17 @@
 
         <ul class="nav navbar-nav pull-right toolbar">
         	<li class="dropdown">
-        		<a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">John McCartney <i class="fa fa-caret-down"></i></span><img src="assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+        		<a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs"><span class="username"><?php echo $username; ?></span> <i class="fa fa-caret-down"></i></span><img src="assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
         		<ul class="dropdown-menu userinfo arrow">
         			<li class="username">
-                        <a href="#">
-        				    <div class="pull-left"><img class="userimg" src="assets/demo/avatar/dangerfield.png" alt="Jeff Dangerfield"/></div>
-        				    <div class="pull-right"><h5>Howdy, John!</h5><small>Logged in as <span>john275</span></small></div>
-                        </a>
+              		<a href="#">
+        				    	<div class="pull-left"><img class="userimg" src="assets/demo/avatar/dangerfield.png" alt="Jeff Dangerfield"/></div>
+        				  		<div class="pull-right"><h5>Howdy, <span class="username"><?php echo $username; ?></span>!</h5></div>
+                  </a>
         			</li>
         			<li class="userlinks">
         				<ul class="dropdown-menu">
-        					<li><a href="#">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
-        					<li><a href="#">Account <i class="pull-right fa fa-cog"></i></a></li>
-        					<li><a href="#">Help <i class="pull-right fa fa-question-circle"></i></a></li>
-        					<li class="divider"></li>
-        					<li><a href="#" class="text-right">Sign Out</a></li>
+        					<li><a href="#" id="change_name" class="text-right">Change Name</a></li>
         				</ul>
         			</li>
         		</ul>
@@ -498,6 +494,26 @@
 		        </div>
 		    </footer>
 		</div> <!-- page-container -->
+
+<div class="modal fade" id="change_name_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">Change Name</h4>
+			</div>
+			<div class="modal-body">
+					<input type="text" name="name" class="form-control" placeholder="Your New Name">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+
+
 <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script>
 <script type='text/javascript' src='assets/js/jqueryui-1.10.3.min.js'></script>
 <script type='text/javascript' src='assets/js/bootstrap.min.js'></script>

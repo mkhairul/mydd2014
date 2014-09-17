@@ -16,7 +16,34 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 Route::get('/', function()
 {
-		return View::make('mainpage');
+		// Simple identification because not enough time to implement it.
+		// Check if user already have a session
+		$uid = Session::get('uid');
+		if(!$uid){
+				// Generate UID & Username
+				$uid = uniqid();
+				$username = 'Anon';
+				Session::put('uid', $uid);
+				Session::put('username', $username);
+
+				// Save the uid and username in db with the browser info.
+				$user = new Users;
+				$user->uid = $uid;
+				$user->username = 'Anon';
+				$user->save();
+		}
+		else
+		{
+				$username = Session::get('username');
+		}
+
+		return View::make('mainpage', array('uid' => $uid, 'username' => $username));
+});
+
+Route::match(array('POST'), '/api/changeName', array('uses' => 'UserController@changeName'));
+Route::match(array('GET'), '/refresh', function(){
+		Session::forget('uid');
+		return Redirect::to('/');
 });
 
 Route::match(array('GET'), '/janus/{session?}', function($session=''){
@@ -29,8 +56,6 @@ Route::match(array('GET'), '/janus/{session?}', function($session=''){
 				$param_str .= $key . '=' . $val . '&';
 		}
 		$param_str = rtrim($param_str, '&');
-		//echo $param_str;
-		//return $session;
 
 		$url = "http://192.168.1.155:8088/janus/$session?$param_str";
 		$ch = curl_init();
@@ -64,6 +89,10 @@ Route::match(array('POST'), '/janus/{param?}/{handle?}', function($param='', $ha
 
 		//close connection
 		curl_close($ch);
+
+		// Save the broadcast session in DB
+		// $payload = json_decode($content, true);
+		// $broadcast = new Broadcast;
 });
 
 Route::get('/sendmessage', function(){
