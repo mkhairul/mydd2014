@@ -1,0 +1,75 @@
+//Feeds Component
+//(c) The Red Team 2013
+
+.panel-comments, .panel-threads, .panel-users {
+	.list-unstyled;
+	margin-bottom: 20px !important;
+	li {
+		.clearfix();
+		display: block;
+		margin-left: -20px;
+		margin-right: -20px;
+		padding: 20px 20px;
+		border-bottom: 1px solid @border-lighter;
+		&:first-child {padding-top: 0;}
+		img {
+			float: left;
+			height: 30px;
+			width: 30px;
+			border-radius: @border-radius-small;
+		}
+		.content {
+			.time {float: right; color: @gray-light; font-size: @font-size-small;}
+			margin-left: 45px;
+		}
+	}
+}
+
+
+.panel-comments li .content {
+	.commented {
+		display: block; 
+		margin-bottom: 10px;
+	}
+	.actions { 
+		display: block;
+		margin-top: 10px;
+		line-height: 1em;
+		a {
+			color: @gray;
+			font-size: @font-size-small;
+			&:first-child {margin-left: 0;}
+			&:hover {
+				text-decoration: none;
+				color: @gray-darker;
+			}
+		}
+	}
+}
+
+.panel-threads li .content {
+	.title {display: block;}
+	.thread {
+		color: @gray-light; 
+		display: block;
+		font-size: @font-size-small; 
+		padding-top: 5px; 
+		line-height: 14px;
+		a {
+			color: @gray;
+			&:hover {
+				color: @gray-darker; 
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+
+.panel-users li .content {
+	.desc {display: block;}
+	> div {
+		font-size: @font-size-small;
+		color: @gray-light;
+	}
+}
